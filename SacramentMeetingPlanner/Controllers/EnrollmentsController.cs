@@ -49,7 +49,7 @@ namespace SacramentMeetingPlanner.Controllers
         // GET: Enrollments/Create
         public IActionResult Create()
         {
-            ViewData["SacramentID"] = new SelectList(_context.Sacrament, "ID", "ID");
+            ViewData["SacramentID"] = new SelectList(_context.Sacrament, "SacramentID", "SacramentID");
             ViewData["SpeakerID"] = new SelectList(_context.Speakers, "SpeakerID", "SpeakerID");
             return View();
         }
@@ -67,7 +67,7 @@ namespace SacramentMeetingPlanner.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SacramentID"] = new SelectList(_context.Sacrament, "ID", "ID", enrollment.SacramentID);
+            ViewData["SacramentID"] = new SelectList(_context.Sacrament, "SacramentID", "SacramentID", enrollment.SacramentID);
             ViewData["SpeakerID"] = new SelectList(_context.Speakers, "SpeakerID", "SpeakerID", enrollment.SpeakerID);
             return View(enrollment);
         }
@@ -85,7 +85,7 @@ namespace SacramentMeetingPlanner.Controllers
             {
                 return NotFound();
             }
-            ViewData["SacramentID"] = new SelectList(_context.Sacrament, "ID", "ID", enrollment.SacramentID);
+            ViewData["SacramentID"] = new SelectList(_context.Sacrament, "SacramentID", "SacramentID", enrollment.SacramentID);
             ViewData["SpeakerID"] = new SelectList(_context.Speakers, "SpeakerID", "SpeakerID", enrollment.SpeakerID);
             return View(enrollment);
         }
@@ -122,7 +122,7 @@ namespace SacramentMeetingPlanner.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SacramentID"] = new SelectList(_context.Sacrament, "ID", "ID", enrollment.SacramentID);
+            ViewData["SacramentID"] = new SelectList(_context.Sacrament, "SacramentID", "SacramentID", enrollment.SacramentID);
             ViewData["SpeakerID"] = new SelectList(_context.Speakers, "SpeakerID", "SpeakerID", enrollment.SpeakerID);
             return View(enrollment);
         }
