@@ -7,7 +7,7 @@ namespace SacramentMeetingPlanner.Models
 {
     public class Sacrament
     {
-        public int SacramentID { get; set; }
+        public int ID { get; set; }
 
         public DateTime Date { get; set; }
 

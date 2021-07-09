@@ -12,7 +12,7 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="SacramentID" />
+            <input type="hidden" asp-for="ID" />
             <div class="form-group">
                 <label asp-for="Date" class="control-label"></label>
                 <input asp-for="Date" class="form-control" />
@@ -52,11 +52,6 @@
                 <label asp-for="ClosingPrayer" class="control-label"></label>
                 <input asp-for="ClosingPrayer" class="form-control" />
                 <span asp-validation-for="ClosingPrayer" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SpeakerID" class="control-label"></label>
-                <input asp-for="SpeakerID" class="form-control" />
-                <span asp-validation-for="SpeakerID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
