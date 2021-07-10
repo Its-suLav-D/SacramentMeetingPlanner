@@ -17,13 +17,13 @@ namespace SacramentMeetingPlanner.Data
         public DbSet<Sacrament> Sacrament { get; set; }
         public DbSet<Speaker> Speakers { get; set; }
 
-        public DbSet<Enrollment> Enrollments { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Sacrament>().ToTable("Sacrament");
             modelBuilder.Entity<Speaker>().ToTable("Speaker");
-            modelBuilder.Entity<Enrollment>().ToTable("Enrollment");
+      
         }
 
     }

@@ -19,31 +19,9 @@ namespace SacramentMeetingPlanner.Migrations
                 .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("SacramentMeetingPlanner.Models.Enrollment", b =>
-                {
-                    b.Property<int>("EnrollmentID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("SacramentID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SpeakerID")
-                        .HasColumnType("int");
-
-                    b.HasKey("EnrollmentID");
-
-                    b.HasIndex("SacramentID");
-
-                    b.HasIndex("SpeakerID");
-
-                    b.ToTable("Enrollment");
-                });
-
             modelBuilder.Entity("SacramentMeetingPlanner.Models.Sacrament", b =>
                 {
-                    b.Property<int>("SacramentID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -72,19 +50,19 @@ namespace SacramentMeetingPlanner.Migrations
                     b.Property<string>("SacramentHymn")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("SacramentID");
+                    b.HasKey("ID");
 
                     b.ToTable("Sacrament");
                 });
 
             modelBuilder.Entity("SacramentMeetingPlanner.Models.Speaker", b =>
                 {
-                    b.Property<int>("SpeakerID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("SacramentID")
+                    b.Property<int>("SacramentID")
                         .HasColumnType("int");
 
                     b.Property<string>("SpeakerName")
@@ -93,49 +71,27 @@ namespace SacramentMeetingPlanner.Migrations
                     b.Property<string>("Topic")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("SpeakerID");
+                    b.HasKey("ID");
 
                     b.HasIndex("SacramentID");
 
                     b.ToTable("Speaker");
                 });
 
-            modelBuilder.Entity("SacramentMeetingPlanner.Models.Enrollment", b =>
+            modelBuilder.Entity("SacramentMeetingPlanner.Models.Speaker", b =>
                 {
-                    b.HasOne("SacramentMeetingPlanner.Models.Sacrament", "Sacrament")
-                        .WithMany("Enrollments")
+                    b.HasOne("SacramentMeetingPlanner.Models.Sacrament", "Sacraments")
+                        .WithMany("Speakers")
                         .HasForeignKey("SacramentID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SacramentMeetingPlanner.Models.Speaker", "Speaker")
-                        .WithMany("Enrollments")
-                        .HasForeignKey("SpeakerID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Sacrament");
-
-                    b.Navigation("Speaker");
-                });
-
-            modelBuilder.Entity("SacramentMeetingPlanner.Models.Speaker", b =>
-                {
-                    b.HasOne("SacramentMeetingPlanner.Models.Sacrament", null)
-                        .WithMany("Speakers")
-                        .HasForeignKey("SacramentID");
+                    b.Navigation("Sacraments");
                 });
 
             modelBuilder.Entity("SacramentMeetingPlanner.Models.Sacrament", b =>
                 {
-                    b.Navigation("Enrollments");
-
                     b.Navigation("Speakers");
-                });
-
-            modelBuilder.Entity("SacramentMeetingPlanner.Models.Speaker", b =>
-                {
-                    b.Navigation("Enrollments");
                 });
 #pragma warning restore 612, 618
         }

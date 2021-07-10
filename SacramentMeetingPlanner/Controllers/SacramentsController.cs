@@ -34,7 +34,7 @@ namespace SacramentMeetingPlanner.Controllers
             }
 
             var sacrament = await _context.Sacrament
-                .FirstOrDefaultAsync(m => m.SacramentID == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (sacrament == null)
             {
                 return NotFound();
@@ -58,17 +58,22 @@ namespace SacramentMeetingPlanner.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(sacrament);
-                speaker.Topic = Request.Form["Topic"];
+              
+                if (sacrament!= null)
+                {
+                    _context.Add(sacrament);
+                    await _context.SaveChangesAsync();
+                }
+
                 speaker.SpeakerName = Request.Form["Speaker"];
+                speaker.Topic = Request.Form["Topic"];
+                speaker.SacramentID = sacrament.ID;
+                _context.Add(speaker);
 
-                _context.AddRange(speaker);
 
-                Enrollment enroll = new Enrollment();
-               
-                enroll.SpeakerID = speaker.SpeakerID;
-                _context.AddRange(enroll);
                 await _context.SaveChangesAsync();
+               
+                
                 return RedirectToAction(nameof(Index));
             }
             return View(sacrament);
@@ -97,7 +102,7 @@ namespace SacramentMeetingPlanner.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Date,Conducting,OpeningHymn,OpeningPrayer,SacramentHymn,IntermediateHymn,ClosingHymn,ClosingPrayer")] Sacrament sacrament)
         {
-            if (id != sacrament.SacramentID)
+            if (id != sacrament.ID)
             {
                 return NotFound();
             }
@@ -111,7 +116,7 @@ namespace SacramentMeetingPlanner.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SacramentExists(sacrament.SacramentID))
+                    if (!SacramentExists(sacrament.ID))
                     {
                         return NotFound();
                     }
@@ -134,7 +139,7 @@ namespace SacramentMeetingPlanner.Controllers
             }
 
             var sacrament = await _context.Sacrament
-                .FirstOrDefaultAsync(m => m.SacramentID == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (sacrament == null)
             {
                 return NotFound();
@@ -156,7 +161,7 @@ namespace SacramentMeetingPlanner.Controllers
 
         private bool SacramentExists(int id)
         {
-            return _context.Sacrament.Any(e => e.SacramentID == id);
+            return _context.Sacrament.Any(e => e.ID == id);
         }
     }
 }
