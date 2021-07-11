@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Sacrament Meetings Programs</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -21,29 +21,39 @@
             <th>
                 @Html.DisplayNameFor(model => model.Conducting)
             </th>
+            @*<th>
+            @Html.DisplayNameFor(model => model.OpeningHymn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OpeningPrayer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SacramentHymn)
+        </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.OpeningHymn)
+                @Html.DisplayNameFor(model => model.Speakers)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OpeningPrayer)
+                Topic
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SacramentHymn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IntermediateHymn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClosingHymn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClosingPrayer)
-            </th>
+
+            @*<th>
+            @Html.DisplayNameFor(model => model.IntermediateHymn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClosingHymn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClosingPrayer)
+        </th>*@
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
+           
+            
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Date)
@@ -54,30 +64,53 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Conducting)
             </td>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.OpeningHymn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OpeningPrayer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SacramentHymn)
+        </td>*@
             <td>
-                @Html.DisplayFor(modelItem => item.OpeningHymn)
+                @Html.DisplayFor(modelItem => item.Speakers)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.OpeningPrayer)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SacramentHymn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IntermediateHymn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClosingHymn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClosingPrayer)
-            </td>
+            @* //We are trying to get the SpreakerName and Topic to dispaly here with no success
+                @string selectedRow = "";
+                @if (item.ID == (int?)ViewData["ID"])
+            {
+            selectedRow = "success";
+            }
+        <tr class="@selectedRow">
+
+                <td>
+                    @item.Speakers.SpeakerName
+                </td>
+                <td>
+                    @item.Speakers.Topic
+                </td>
+
+            </tr>*@
+
+            @*<td>
+            @Html.DisplayFor(modelItem => item.IntermediateHymn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClosingHymn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClosingPrayer)
+        </td>*@
+
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
             </td>
         </tr>
-}
+        }
     </tbody>
 </table>

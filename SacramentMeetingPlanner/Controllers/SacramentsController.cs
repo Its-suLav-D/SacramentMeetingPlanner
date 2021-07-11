@@ -68,8 +68,8 @@ namespace SacramentMeetingPlanner.Controllers
 
                 speaker.SpeakerName = Request.Form["Speaker"];
                 speaker.Topic = Request.Form["Topic"];
-                speaker.SacramentID = sacrament.ID;
-                _context.Add(speaker);
+                speaker.SacramentID = sacrament.ID;//issue is we need to make a new id for each speaker
+                _context.AddRange(speaker);
 
 
                 await _context.SaveChangesAsync();

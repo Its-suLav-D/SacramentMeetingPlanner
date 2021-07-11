@@ -59,14 +59,14 @@
                 <input asp-for="ClosingPrayer" class="form-control" />
                 <span asp-validation-for="ClosingPrayer" class="text-danger"></span>
             </div>
-            <label class="control-label"> Speakers: </label>
+            <label class="control-label">Topic / Speaker: </label>
             <div id="speakers">
                 <div class="form-row">
                     <div class="col-md-4">
-                        <input placeholder="Topic" value="SpeakerName" class="form-control" name="Topic" required />
+                        <input placeholder="Topic" value="TopicName" class="form-control" name="Topic" required />
                     </div>
                     <div class="col-md-6">
-                        <input placeholder="Speaker Name" class="form-control" name="Speaker" required />
+                        <input placeholder="Speaker Name" value="Name"class="form-control" name="Speaker" required />
                     </div>
                     <div class="col-md-2 speaker-add">
                         <button type="button" class="btn btn-outline-primary btn-sm" id="add-speaker">Add</button>
