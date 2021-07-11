@@ -19,6 +19,11 @@
                 <span asp-validation-for="Date" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Presiding" class="control-label"></label>
+                <input asp-for="Presiding" class="form-control" />
+                <span asp-validation-for="Presiding" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Conducting" class="control-label"></label>
                 <input asp-for="Conducting" class="form-control" />
                 <span asp-validation-for="Conducting" class="text-danger"></span>
@@ -38,6 +43,7 @@
                 <input asp-for="SacramentHymn" class="form-control" />
                 <span asp-validation-for="SacramentHymn" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="IntermediateHymn" class="control-label"></label>
                 <input asp-for="IntermediateHymn" class="form-control" />
@@ -53,12 +59,28 @@
                 <input asp-for="ClosingPrayer" class="form-control" />
                 <span asp-validation-for="ClosingPrayer" class="text-danger"></span>
             </div>
+            <label class="control-label"> Speakers: </label>
+            <div id="speakers">
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <input placeholder="Topic" value="SpeakerName" class="form-control" name="Topic" required />
+                    </div>
+                    <div class="col-md-6">
+                        <input placeholder="Speaker Name" class="form-control" name="Speaker" required />
+                    </div>
+                    <div class="col-md-2 speaker-add">
+                        <button type="button" class="btn btn-outline-primary btn-sm" id="add-speaker">Add</button>
+                    </div>
+                </div>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
+
+
 
 <div>
     <a asp-action="Index">Back to List</a>

@@ -3,59 +3,93 @@
 @{
     ViewData["Title"] = "Details";
 }
-
-<h1>Details</h1>
+<div class="center">
+    <h3>Rexburg 12th Ward</h3>
+    <h4>@Html.DisplayFor(model => model.Date)</h4>
+</div>
 
 <div>
-    <h4>Sacrament</h4>
+    <h6>Sacrament Program</h6>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Date)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Presiding)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Date)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Presiding)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Conducting)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Conducting)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.OpeningHymn)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.OpeningHymn)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.OpeningPrayer)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.OpeningPrayer)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.SacramentHymn)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.SacramentHymn)
         </dd>
-        <dt class = "col-sm-2">
+
+        @if (Model.Speakers != null)
+        {
+            <table class="table">
+                <tr>
+                    <th>Speaker</th>
+                    <th>Topic</th>
+
+                </tr>
+
+                @foreach (var item in Model.Speakers)
+                {
+                    string selectedRow = "";
+                    if (item.ID == (int?)ViewData["ID"])
+                    {
+                        selectedRow = "success";
+                    }
+                    <tr class="@selectedRow">
+
+                        <td>
+                            @item.SpeakerName<br />
+                        </td>
+                        <td>
+                            @item.Topic<br />
+                        </td>
+
+                    </tr>
+                }
+
+            </table>
+        }
+
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.IntermediateHymn)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IntermediateHymn)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ClosingHymn)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ClosingHymn)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ClosingPrayer)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ClosingPrayer)
         </dd>
     </dl>
@@ -64,3 +98,6 @@
     <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+
+
+

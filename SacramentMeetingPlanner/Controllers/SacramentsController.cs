@@ -34,6 +34,7 @@ namespace SacramentMeetingPlanner.Controllers
             }
 
             var sacrament = await _context.Sacrament
+                .Include(s => s.Speakers)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (sacrament == null)
             {
@@ -54,7 +55,7 @@ namespace SacramentMeetingPlanner.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Date,Conducting,OpeningHymn,OpeningPrayer,SacramentHymn,IntermediateHymn,ClosingHymn,ClosingPrayer")] Sacrament sacrament, Speaker speaker)
+        public async Task<IActionResult> Create([Bind("ID,Date,Conducting,OpeningHymn,OpeningPrayer,SacramentHymn,IntermediateHymn,ClosingHymn,ClosingPrayer,Presiding")] Sacrament sacrament, Speaker speaker)
         {
             if (ModelState.IsValid)
             {
@@ -100,7 +101,7 @@ namespace SacramentMeetingPlanner.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Date,Conducting,OpeningHymn,OpeningPrayer,SacramentHymn,IntermediateHymn,ClosingHymn,ClosingPrayer")] Sacrament sacrament)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Date,Conducting,OpeningHymn,OpeningPrayer,SacramentHymn,IntermediateHymn,ClosingHymn,ClosingPrayer,Presiding")] Sacrament sacrament)
         {
             if (id != sacrament.ID)
             {
