@@ -22,7 +22,9 @@ namespace SacramentMeetingPlanner.Controllers
         // GET: Sacraments
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Sacrament.ToListAsync());
+            
+            return View(await _context.Sacrament.Include(s => s.Speakers).ToListAsync());
+
         }
 
         // GET: Sacraments/Details/5
@@ -53,32 +55,44 @@ namespace SacramentMeetingPlanner.Controllers
         // POST: Sacraments/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Sacraments/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Date,Conducting,OpeningHymn,OpeningPrayer,SacramentHymn,IntermediateHymn,ClosingHymn,ClosingPrayer,Presiding")] Sacrament sacrament, Speaker speaker)
+        public async Task<IActionResult> Create([Bind("ID,Date,Conducting,OpeningHymn,OpeningPrayer,SacramentHymn,IntermediateHymn,ClosingHymn,ClosingPrayer")] Sacrament sacrament)
         {
             if (ModelState.IsValid)
             {
-              
-                if (sacrament!= null)
+
+                if (sacrament != null)
                 {
                     _context.Add(sacrament);
                     await _context.SaveChangesAsync();
                 }
+                string[] spk = Request.Form["Speaker"];
+                string[] tpc = Request.Form["Topic"];
+                List<Speaker> speakers = new List<Speaker>();
+                for (int i = 0; i < spk.Length; i++)
+                {
+                    var speakr = new Speaker { SpeakerName = spk[i], Topic = tpc[i], SacramentID = sacrament.ID };
+                    speakers.Add(speakr);
+                }
 
-                speaker.SpeakerName = Request.Form["Speaker"];
-                speaker.Topic = Request.Form["Topic"];
-                speaker.SacramentID = sacrament.ID;//issue is we need to make a new id for each speaker
-                _context.AddRange(speaker);
-
+                foreach (Speaker s in speakers)
+                {
+                    _context.Add(s);
+                }
 
                 await _context.SaveChangesAsync();
-               
-                
+
+
                 return RedirectToAction(nameof(Index));
             }
             return View(sacrament);
         }
+
+
 
         // GET: Sacraments/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -88,7 +102,12 @@ namespace SacramentMeetingPlanner.Controllers
                 return NotFound();
             }
 
-            var sacrament = await _context.Sacrament.FindAsync(id);
+            var sacrament = await _context.Sacrament
+                 .Include(s => s.Speakers)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.ID == id);
+
+
             if (sacrament == null)
             {
                 return NotFound();

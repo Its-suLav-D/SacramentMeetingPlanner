@@ -64,19 +64,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Conducting)
             </td>
-            @*<td>
-            @Html.DisplayFor(modelItem => item.OpeningHymn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OpeningPrayer)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SacramentHymn)
-        </td>*@
+           
             <td>
                 @Html.DisplayFor(modelItem => item.Speakers)
+                
+               
             </td>
             <td>
+
             </td>
             @* //We are trying to get the SpreakerName and Topic to dispaly here with no success
                 @string selectedRow = "";
@@ -95,15 +90,7 @@
 
             </tr>*@
 
-            @*<td>
-            @Html.DisplayFor(modelItem => item.IntermediateHymn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ClosingHymn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ClosingPrayer)
-        </td>*@
+           
 
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
