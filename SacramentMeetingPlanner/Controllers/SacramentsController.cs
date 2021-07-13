@@ -122,9 +122,6 @@ namespace SacramentMeetingPlanner.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Date,Conducting,OpeningHymn,OpeningPrayer,SacramentHymn,IntermediateHymn,ClosingHymn,ClosingPrayer,Presiding")] Sacrament sacrament)
         {
-
-
-
             if (id != sacrament.ID)
             {
                 return NotFound();
@@ -134,10 +131,12 @@ namespace SacramentMeetingPlanner.Controllers
             {
                 try
                 {
-                    _context.Update(sacrament);
-                    await _context.SaveChangesAsync();
-
-
+                    if (sacrament != null)
+                    {
+                        _context.Update(sacrament);
+                        await _context.SaveChangesAsync();
+                    }
+                   
                     //what we are trying to do to delete the fields from the database and then let it add the new fields
                 //    Speaker speakerToBeDeleted = await _context.Speakers
                 //        .AsNoTracking()
@@ -153,20 +152,22 @@ namespace SacramentMeetingPlanner.Controllers
                 //        _context.Speakers.Remove(speakerToBeDeleted);
 
                     //This has added the new fields to the database
-                    string[] spk = new string[] { };
-                    string[] tpc = new string[] { };
-                     spk = Request.Form["Speaker"];
-                     tpc = Request.Form["Topic"];
+                    string[] spk = Request.Form["Speaker"];
+                    string[] tpc = Request.Form["Topic"];
+                    string[] spkId = Request.Form["SpeakerID"];
+
                     List<Speaker> speakers = new List<Speaker>();
+                    Speaker spkr = new Speaker();
                     for (int i = 0; i < spk.Length; i++)
                     {
-                        var speakr = new Speaker { SpeakerName = spk[i], Topic = tpc[i], SacramentID = sacrament.ID };
+                        var speakr = new Speaker { SpeakerName = spk[i], Topic = tpc[i], SacramentID = sacrament.ID, ID = Int32.Parse(spkId[i])};
                         speakers.Add(speakr);
+                        
                     }
 
                     foreach (Speaker s in speakers)
                     {
-                        _context.Add(s);
+                        _context.Update(s);
                     }
 
                     await _context.SaveChangesAsync();

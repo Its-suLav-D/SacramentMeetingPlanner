@@ -14,6 +14,7 @@ namespace SacramentMeetingPlanner.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Presiding = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Conducting = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OpeningHymn = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OpeningPrayer = table.Column<string>(type: "nvarchar(max)", nullable: true),

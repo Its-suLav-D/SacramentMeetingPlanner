@@ -10,7 +10,7 @@ using SacramentMeetingPlanner.Data;
 namespace SacramentMeetingPlanner.Migrations
 {
     [DbContext(typeof(SacramentContext))]
-    [Migration("20210710055105_InitialCreate")]
+    [Migration("20210713060242_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,6 +47,9 @@ namespace SacramentMeetingPlanner.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OpeningPrayer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Presiding")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SacramentHymn")

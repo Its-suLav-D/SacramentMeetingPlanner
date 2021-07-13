@@ -59,21 +59,18 @@
                 <input asp-for="ClosingPrayer" class="form-control" />
                 <span asp-validation-for="ClosingPrayer" class="text-danger"></span>
             </div>
-        <label class="control-label">Topic / Speaker: </label>
+            <label class="control-label">Topic / Speaker:    <button type="button" class="btn btn-outline-primary btn-sm" id="add-speaker">Add</button> </label>
             <div id="speakers">
                 @foreach (var speaker in Model.Speakers)
                 {
-                <div class="form-row">
-                    <div class="col-md-4">
+                <div class="form-row my-2">
+                    <div class="col-md-12 d-flex">
                         <input placeholder="Topic" class="form-control" name="Topic" value="@speaker.Topic" required />
+                        <input placeholder="Speaker Name" class="form-control" name="Speaker" value="@speaker.SpeakerName" required id="speakerName" />
+                        <input type="hidden" name="SpeakerID" value="@speaker.ID" />
                     </div>
-                    <div class="col-md-6">
-                        <input placeholder="Speaker Name" class="form-control" name="Speaker" value="@speaker.SpeakerName" required />
-                    </div>
-                    <div class="col-md-2 speaker-add">
-                        <button type="button" class="btn btn-outline-primary btn-sm" id="add-speaker">Add</button>
-                        <button type="button" class="btn btn-outline-danger btn-sm" id="remove-speaker" onclick="removeSpeaker(this);">Remove</button>
-                    </div>
+                    
+                    
                     
                 </div>}
 
