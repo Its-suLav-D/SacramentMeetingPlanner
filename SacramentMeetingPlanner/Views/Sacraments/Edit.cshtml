@@ -63,17 +63,19 @@
             <div id="speakers">
                 @foreach (var speaker in Model.Speakers)
                 {
-            <div class="form-row">
-                <div class="col-md-4">
-                    <input placeholder="Topic" class="form-control" name="Topic" value="@speaker.Topic" required />
-                </div>
-                <div class="col-md-6">
-                    <input placeholder="Speaker Name" class="form-control" name="Speaker" value="@speaker.SpeakerName" required />
-                </div>
-                <div class="col-md-2 speaker-add">
-                    <button type="button" class="btn btn-outline-primary btn-sm" id="add-speaker">Add</button>
-                </div>
-            </div>}
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <input placeholder="Topic" class="form-control" name="Topic" value="@speaker.Topic" required />
+                    </div>
+                    <div class="col-md-6">
+                        <input placeholder="Speaker Name" class="form-control" name="Speaker" value="@speaker.SpeakerName" required />
+                    </div>
+                    <div class="col-md-2 speaker-add">
+                        <button type="button" class="btn btn-outline-primary btn-sm" id="add-speaker">Add</button>
+                        <button type="button" class="btn btn-outline-danger btn-sm" id="remove-speaker" onclick="removeSpeaker(this);">Remove</button>
+                    </div>
+                    
+                </div>}
 
             </div>
             <div class="form-group">

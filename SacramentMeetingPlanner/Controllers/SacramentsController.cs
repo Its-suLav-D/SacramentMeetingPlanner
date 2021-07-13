@@ -60,7 +60,7 @@ namespace SacramentMeetingPlanner.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Date,Conducting,OpeningHymn,OpeningPrayer,SacramentHymn,IntermediateHymn,ClosingHymn,ClosingPrayer")] Sacrament sacrament)
+        public async Task<IActionResult> Create([Bind("ID,Date,Conducting,OpeningHymn,OpeningPrayer,SacramentHymn,IntermediateHymn,ClosingHymn,ClosingPrayer,Presiding")] Sacrament sacrament)
         {
             if (ModelState.IsValid)
             {
@@ -122,6 +122,9 @@ namespace SacramentMeetingPlanner.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Date,Conducting,OpeningHymn,OpeningPrayer,SacramentHymn,IntermediateHymn,ClosingHymn,ClosingPrayer,Presiding")] Sacrament sacrament)
         {
+
+
+
             if (id != sacrament.ID)
             {
                 return NotFound();
@@ -132,6 +135,40 @@ namespace SacramentMeetingPlanner.Controllers
                 try
                 {
                     _context.Update(sacrament);
+                    await _context.SaveChangesAsync();
+
+
+                    //what we are trying to do to delete the fields from the database and then let it add the new fields
+                //    Speaker speakerToBeDeleted = await _context.Speakers
+                //        .AsNoTracking()
+                //        .SingleAsync(i => i.ID == id);
+                //    speakerToBeDeleted.ForEach(d => d.ID = null);
+
+                //    var departments = await _context.Departments
+                //.Where(d => d.InstructorID == id)
+                //.ToListAsync();
+                //    departments.ForEach(d => d.InstructorID = null);
+
+                //    if (speakerToBeDeleted != null)
+                //        _context.Speakers.Remove(speakerToBeDeleted);
+
+                    //This has added the new fields to the database
+                    string[] spk = new string[] { };
+                    string[] tpc = new string[] { };
+                     spk = Request.Form["Speaker"];
+                     tpc = Request.Form["Topic"];
+                    List<Speaker> speakers = new List<Speaker>();
+                    for (int i = 0; i < spk.Length; i++)
+                    {
+                        var speakr = new Speaker { SpeakerName = spk[i], Topic = tpc[i], SacramentID = sacrament.ID };
+                        speakers.Add(speakr);
+                    }
+
+                    foreach (Speaker s in speakers)
+                    {
+                        _context.Add(s);
+                    }
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -149,6 +186,8 @@ namespace SacramentMeetingPlanner.Controllers
             }
             return View(sacrament);
         }
+
+     
 
         // GET: Sacraments/Delete/5
         public async Task<IActionResult> Delete(int? id)
