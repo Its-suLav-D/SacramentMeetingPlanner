@@ -18,10 +18,7 @@ function removeSpeaker(element) {
     const el = element.closest('.my-2')
     el.remove();
 }
-//function removeSpeakerWID(element) {
-//    const el = element.closest('.my-2')
-//    el.remove();
-//}
+
 
 addSpeaker.addEventListener('click', addSpeakerInput);
 

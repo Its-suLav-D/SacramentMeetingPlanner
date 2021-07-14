@@ -52,9 +52,7 @@ namespace SacramentMeetingPlanner.Controllers
             return View();
         }
 
-        // POST: Sacraments/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         // POST: Sacraments/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -136,28 +134,31 @@ namespace SacramentMeetingPlanner.Controllers
                         _context.Update(sacrament);
                         await _context.SaveChangesAsync();
                     }
-                   
-                    //what we are trying to do to delete the fields from the database and then let it add the new fields
-                //    Speaker speakerToBeDeleted = await _context.Speakers
-                //        .AsNoTracking()
-                //        .SingleAsync(i => i.ID == id);
-                //    speakerToBeDeleted.ForEach(d => d.ID = null);
 
-                
+                    //create a new list of all the speakers to be removed
+                    var speakersToBeDeleted = await _context.Sacrament
+                        .Include(s => s.Speakers)
+                        .FirstOrDefaultAsync(m => m.ID == id);
 
-                //    if (speakerToBeDeleted != null)
-                //        _context.Speakers.Remove(speakerToBeDeleted);
+
+                     foreach (Speaker s in speakersToBeDeleted.Speakers)
+                    {
+                        _context.Remove(s);
+                    }
+
 
                     //This has added the new fields to the database
                     string[] spk = Request.Form["Speaker"];
                     string[] tpc = Request.Form["Topic"];
-                    string[] spkId = Request.Form["SpeakerID"];
+                    //string[] spkId = Request.Form["SpeakerID"];
 
                     List<Speaker> speakers = new List<Speaker>();
                     Speaker spkr = new Speaker();
                     for (int i = 0; i < spk.Length; i++)
                     {
-                        var speakr = new Speaker { SpeakerName = spk[i], Topic = tpc[i], SacramentID = sacrament.ID, ID = Int32.Parse(spkId[i])};
+                        
+                        //var speakr = new Speaker { SpeakerName = spk[i], Topic = tpc[i], SacramentID = sacrament.ID, ID = Int32.Parse(spkId[i])};
+                        var speakr = new Speaker { SpeakerName = spk[i], Topic = tpc[i], SacramentID = sacrament.ID };
                         speakers.Add(speakr);
                         
                     }
