@@ -65,9 +65,9 @@
                 {
                 <div class="form-row my-2">
                     <div class="col-md-12 d-flex">
-                        <input placeholder="Topic" class="form-control" name="Topic" value="@speaker.Topic" required />
-                        <input placeholder="Speaker Name" class="form-control" name="Speaker" value="@speaker.SpeakerName" required id="speakerName" />
-                        <input type="hidden" name="SpeakerID" value="@speaker.ID" />
+                        <input placeholder="Topic" data-id="@speaker.ID" class="form-control" name="Topic" value="@speaker.Topic" required />
+                        <input placeholder="Speaker Name" data-id="@speaker.ID" class="form-control" name="Speaker" value="@speaker.SpeakerName" required id="speakerName" />
+                        <button type="button" class="btn btn-outline-danger btn-sm" data-id="@speaker.ID" onclick="removeSpeakerWID(@speaker.ID)">Remove</button>
                     </div>
                     
                     

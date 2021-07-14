@@ -143,10 +143,7 @@ namespace SacramentMeetingPlanner.Controllers
                 //        .SingleAsync(i => i.ID == id);
                 //    speakerToBeDeleted.ForEach(d => d.ID = null);
 
-                //    var departments = await _context.Departments
-                //.Where(d => d.InstructorID == id)
-                //.ToListAsync();
-                //    departments.ForEach(d => d.InstructorID = null);
+                
 
                 //    if (speakerToBeDeleted != null)
                 //        _context.Speakers.Remove(speakerToBeDeleted);

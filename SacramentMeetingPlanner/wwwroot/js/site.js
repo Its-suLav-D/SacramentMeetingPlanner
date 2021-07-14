@@ -18,11 +18,21 @@ function removeSpeaker(element) {
     const el = element.closest('.my-2')
     el.remove();
 }
-
+//function removeSpeakerWID(element) {
+//    const el = element.closest('.my-2')
+//    el.remove();
+//}
 
 addSpeaker.addEventListener('click', addSpeakerInput);
 
 
+function removeSpeakerWID(speakerId) {
+    let controls = document.querySelectorAll(`[data-id="${speakerId}"]`);
 
+    controls.forEach(
+        control => {
+            control.remove();
+        });
+}
 
 
