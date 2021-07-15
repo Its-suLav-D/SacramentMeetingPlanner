@@ -3,12 +3,16 @@
 @{
     ViewData["Title"] = "Details";
 }
-<div class="center">
-    <h3>Rexburg 12th Ward</h3>
-    <h4>@Html.DisplayFor(model => model.Date)</h4>
-</div>
 
-<div>
+
+<div class="container">
+
+    <div class="center">
+        <h3>Rexburg 12th Ward</h3>
+        <h4>@Html.DisplayFor(model => model.Date)</h4>
+    </div>
+
+
     <h6>Sacrament Program</h6>
     <hr />
     <dl class="row">
@@ -93,11 +97,13 @@
             @Html.DisplayFor(model => model.ClosingPrayer)
         </dd>
     </dl>
+
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 
 
